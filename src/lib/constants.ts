@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, ArrowRightLeft, FileText, Newspaper, Calculator } from "lucide-react";
+import { LayoutDashboard, ArrowRightLeft, FileText, Newspaper, Calculator, Sparkles } from "lucide-react";
 
 type NavItem = {
   label: string;
@@ -27,6 +27,11 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Tax Calculator",
     href: "/tax-calculator",
     icon: Calculator,
+  },
+  {
+    label: "AI Insights",
+    href: "/ai-insights",
+    icon: Sparkles,
   },
   {
     label: "News",
