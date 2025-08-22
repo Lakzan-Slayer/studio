@@ -11,20 +11,22 @@ type AppLayoutProps = {
 export function AppLayout({ children, pageTitle }: AppLayoutProps) {
   return (
     <SidebarProvider>
-      <div className="min-h-dvh">
+      <div className="min-h-dvh flex">
         <Sidebar collapsible="icon">
           <SidebarNav />
         </Sidebar>
-        <SidebarInset>
+        <div className="flex flex-col w-full">
           <header className="flex h-14 items-center gap-4 border-b bg-card px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30">
             <SidebarTrigger className="md:hidden" />
-            <h1 className="text-xl font-semibold hidden md:block">{pageTitle}</h1>
-            <div className="ml-auto">
-              <UserNav />
+            <div className="w-full flex items-center gap-4">
+                <h1 className="text-xl font-semibold hidden md:block">{pageTitle}</h1>
+                <div className="ml-auto">
+                    <UserNav />
+                </div>
             </div>
           </header>
           <main className="flex-1 p-4 sm:p-6 overflow-y-auto">{children}</main>
-        </SidebarInset>
+        </div>
       </div>
     </SidebarProvider>
   );
