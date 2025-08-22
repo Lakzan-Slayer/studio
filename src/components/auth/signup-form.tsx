@@ -63,7 +63,7 @@ export function SignupForm() {
       await updateProfile(userCredential.user, {
         displayName: values.name,
       });
-      router.push("/dashboard");
+      router.push("/personal-details");
     } catch (error: any) {
       console.error("Signup error:", error);
       toast({
@@ -80,7 +80,7 @@ export function SignupForm() {
       setIsGoogleLoading(true);
       try {
           await signInWithPopup(auth, googleProvider);
-          router.push("/dashboard");
+          router.push("/personal-details");
       } catch (error: any) {
           console.error("Google sign-in error:", error);
           toast({

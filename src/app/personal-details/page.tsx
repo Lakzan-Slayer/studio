@@ -7,12 +7,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { User, Calendar, BadgeInfo, Mail, Phone, Home, Landmark, Edit, Save, Loader2 } from "lucide-react";
+import { User, Calendar, BadgeInfo, Mail, Phone, Home, Landmark, Edit, Save, Loader2, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 import { onAuthStateChanged } from "firebase/auth";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const maskSensitiveInfo = (value: string) => {
     if (!value || value.length <= 4) return value;
@@ -20,11 +22,12 @@ const maskSensitiveInfo = (value: string) => {
 };
 
 export default function PersonalDetailsPage() {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(true); // Start in editing mode on first load
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const { toast } = useToast();
     const [user, setUser] = useState(auth.currentUser);
+    const router = useRouter();
 
     const initialDetails = {
         fullName: "",
@@ -60,13 +63,16 @@ export default function PersonalDetailsPage() {
                                 address: data.address || "",
                                 bankAccount: data.bankAccount || "",
                             });
+                            // If user has existing details, don't force edit mode
+                            setIsEditing(false);
                         } else {
-                            // If no doc, pre-fill with auth data
+                            // If no doc, pre-fill with auth data and force edit mode
                             setDetails(prev => ({
                                 ...prev,
                                 fullName: currentUser.displayName || "",
                                 email: currentUser.email || "",
                             }));
+                            setIsEditing(true);
                         }
                     } catch (error) {
                         console.error("Error fetching user details:", error);
@@ -83,11 +89,12 @@ export default function PersonalDetailsPage() {
             } else {
                 setIsLoading(false);
                 setDetails(initialDetails);
+                 router.push("/login");
             }
         });
 
         return () => unsubscribe();
-    }, [toast]);
+    }, [toast, router]);
 
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -111,7 +118,7 @@ export default function PersonalDetailsPage() {
                 title: "Success",
                 description: "Your details have been saved.",
             });
-            setIsEditing(false);
+            router.push('/dashboard');
         } catch (error) {
             console.error("Error saving details:", error);
             toast({
@@ -136,11 +143,11 @@ export default function PersonalDetailsPage() {
 
     return (
         <AppLayout pageTitle="Personal Details">
-            <Card>
+             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                     <div>
                         <CardTitle>Your Information</CardTitle>
-                        <CardDescription>Manage your personal and bank details.</CardDescription>
+                        <CardDescription>Manage your personal and bank details. Fill this out to get started.</CardDescription>
                     </div>
                      <Button variant="outline" size="icon" onClick={() => setIsEditing(!isEditing)} disabled={isSaving}>
                         {isEditing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
@@ -215,12 +222,20 @@ export default function PersonalDetailsPage() {
                     </form>
                 </CardContent>
             </Card>
-             {isEditing && (
-                <Button className="fixed bottom-6 right-6 h-12 shadow-lg z-50" onClick={handleSave} disabled={isSaving}>
-                    {isSaving ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Save className="mr-2 h-5 w-5" />}
-                    {isSaving ? 'Saving...' : 'Save Changes'}
+            <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+                 {isEditing && (
+                    <Button className="h-12 shadow-lg" onClick={handleSave} disabled={isSaving}>
+                        {isSaving ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Save className="mr-2 h-5 w-5" />}
+                        {isSaving ? 'Saving...' : 'Save & Continue'}
+                    </Button>
+                )}
+                <Button variant="ghost" asChild>
+                    <Link href="/dashboard" className="flex items-center gap-2">
+                        Skip for now
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
                 </Button>
-            )}
+            </div>
         </AppLayout>
     );
 }
