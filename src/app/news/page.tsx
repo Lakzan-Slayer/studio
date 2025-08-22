@@ -21,7 +21,7 @@ const newsArticles = [
     description: "Investor confidence is soaring as key economic data suggests strong growth in the coming quarter.",
     category: "Markets",
     date: "July 27, 2024",
-    imageUrl: "https://placehold.co/600x400.png",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldHxlbnwwfHx8fDE3NTU4NDAxNDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
     aiHint: "stock market"
   },
   {
