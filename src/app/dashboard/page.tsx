@@ -17,7 +17,7 @@ export default function DashboardPage() {
   
   return (
     <AppLayout pageTitle="Dashboard">
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} change="+20.1%" changeColor="text-green-500" />
         <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} change="+5.2%" changeColor="text-red-500" />
         <MetricCard title="Tax Payable" value="$250" icon={FileDigit} change="-2.1%" changeColor="text-green-500" />
@@ -39,34 +39,36 @@ export default function DashboardPage() {
             </Button>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Description</TableHead>
-                  <TableHead className="hidden sm:table-cell">Type</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {recentTransactions.map((tx) => (
-                  <TableRow key={tx.id}>
-                    <TableCell className="font-medium">{tx.description}</TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                       <Badge variant={tx.type === 'Income' ? 'income' : 'destructive'}>{tx.type}</Badge>
-                    </TableCell>
-                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                      {tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount).toFixed(2)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <div className="overflow-x-auto">
+                <Table>
+                <TableHeader>
+                    <TableRow>
+                    <TableHead>Description</TableHead>
+                    <TableHead className="hidden sm:table-cell">Type</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {recentTransactions.map((tx) => (
+                    <TableRow key={tx.id}>
+                        <TableCell className="font-medium">{tx.description}</TableCell>
+                        <TableCell className="hidden sm:table-cell">
+                        <Badge variant={tx.type === 'Income' ? 'income' : 'destructive'}>{tx.type}</Badge>
+                        </TableCell>
+                        <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                        {tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount).toFixed(2)}
+                        </TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       <Button asChild className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50">
-          <Link href="/transactions">
+          <Link href="/transactions/new">
             <Plus className="h-6 w-6" />
             <span className="sr-only">Add Transaction</span>
           </Link>

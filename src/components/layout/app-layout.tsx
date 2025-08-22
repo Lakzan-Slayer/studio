@@ -11,7 +11,7 @@ type AppLayoutProps = {
 export function AppLayout({ children, pageTitle }: AppLayoutProps) {
   return (
     <SidebarProvider>
-      <div className="min-h-screen">
+      <div className="min-h-dvh">
         <Sidebar collapsible="icon">
           <SidebarNav />
         </Sidebar>
@@ -23,7 +23,7 @@ export function AppLayout({ children, pageTitle }: AppLayoutProps) {
               <UserNav />
             </div>
           </header>
-          <main className="flex-1 p-4 sm:p-6">{children}</main>
+          <main className="flex-1 p-4 sm:p-6 overflow-y-auto">{children}</main>
         </SidebarInset>
       </div>
     </SidebarProvider>

@@ -72,7 +72,7 @@ export default function TransactionsPage() {
     return (
         <AppLayout pageTitle="Transactions">
             <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
+                <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
                         <CardTitle>Transaction History</CardTitle>
                         <CardDescription>Manage your income, expenses, and tax payments.</CardDescription>
@@ -96,35 +96,37 @@ export default function TransactionsPage() {
                     </Dialog>
                 </CardHeader>
                 <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Type</TableHead>
-                                <TableHead>Tax</TableHead>
-                                <TableHead className="text-right">Amount</TableHead>
-                                <TableHead>Date</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {transactions.map((tx) => (
-                                <TableRow key={tx.id}>
-                                    <TableCell className="font-medium">{tx.description}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={tx.type === 'Income' ? 'default' : tx.type === 'Expense' ? 'destructive' : 'secondary'}
-                                               className={tx.type === 'Income' ? 'bg-[hsl(var(--chart-2))]' : tx.type === 'Expense' ? '' : ''}>
-                                            {tx.type}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>{tx.tax ? <Badge variant="outline">{tx.tax}</Badge> : '—'}</TableCell>
-                                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
-                                        ${Math.abs(tx.amount).toFixed(2)}
-                                    </TableCell>
-                                    <TableCell>{tx.date}</TableCell>
+                    <div className="overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="min-w-[200px]">Description</TableHead>
+                                    <TableHead>Type</TableHead>
+                                    <TableHead>Tax</TableHead>
+                                    <TableHead className="text-right">Amount</TableHead>
+                                    <TableHead>Date</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {transactions.map((tx) => (
+                                    <TableRow key={tx.id}>
+                                        <TableCell className="font-medium whitespace-nowrap">{tx.description}</TableCell>
+                                        <TableCell>
+                                            <Badge variant={tx.type === 'Income' ? 'default' : tx.type === 'Expense' ? 'destructive' : 'secondary'}
+                                                className={tx.type === 'Income' ? 'bg-[hsl(var(--chart-2))]' : tx.type === 'Expense' ? '' : ''}>
+                                                {tx.type}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>{tx.tax ? <Badge variant="outline">{tx.tax}</Badge> : '—'}</TableCell>
+                                        <TableCell className={`text-right font-semibold whitespace-nowrap ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
+                                            ${Math.abs(tx.amount).toFixed(2)}
+                                        </TableCell>
+                                        <TableCell className="whitespace-nowrap">{tx.date}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
         </AppLayout>
