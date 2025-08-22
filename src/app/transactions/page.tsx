@@ -6,33 +6,46 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { PlusCircle, Info } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
-// A simple form placeholder, in a real app this would be a full-fledged form component
 const AddTransactionForm = () => (
-    <div className="space-y-4 py-4">
-        <div>
-            <label htmlFor="description" className="text-sm font-medium">Description</label>
-            <input id="description" className="w-full mt-1 p-2 border rounded-md" />
+    <div className="grid gap-4 py-4">
+        <div className="grid gap-2">
+            <Label htmlFor="description">Description</Label>
+            <Input id="description" placeholder="e.g. Coffee" />
         </div>
-        <div>
-            <label htmlFor="amount" className="text-sm font-medium">Amount</label>
-            <input id="amount" type="number" className="w-full mt-1 p-2 border rounded-md" />
+        <div className="grid gap-2">
+            <Label htmlFor="amount">Amount</Label>
+            <Input id="amount" type="number" placeholder="0.00" />
         </div>
-        <div>
-            <label htmlFor="type" className="text-sm font-medium">Type</label>
-            <select id="type" className="w-full mt-1 p-2 border rounded-md">
-                <option>Income</option>
-                <option>Expense</option>
-                <option>Tax</option>
-            </select>
+        <div className="grid gap-2">
+            <Label htmlFor="type">Type</Label>
+            <Select>
+                <SelectTrigger id="type">
+                    <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="income">Income</SelectItem>
+                    <SelectItem value="expense">Expense</SelectItem>
+                    <SelectItem value="tax">Tax</SelectItem>
+                </SelectContent>
+            </Select>
         </div>
         <div className="flex items-center space-x-2">
-            <input id="gst" type="checkbox" />
-            <label htmlFor="gst" className="text-sm font-medium">Includes GST</label>
+            <Checkbox id="gst" />
+            <label
+              htmlFor="gst"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Includes GST
+            </label>
             <TooltipProvider>
                 <Tooltip>
-                    <TooltipTrigger>
-                        <Info className="h-4 w-4 text-muted-foreground" />
+                    <TooltipTrigger asChild>
+                       <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>We try to automatically detect taxes based on category and keywords.</p>
@@ -71,7 +84,7 @@ export default function TransactionsPage() {
                                 Add Transaction
                             </Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="sm:max-w-[425px]">
                             <DialogHeader>
                                 <DialogTitle>Add a new transaction</DialogTitle>
                                 <DialogDescription>
@@ -99,12 +112,12 @@ export default function TransactionsPage() {
                                     <TableCell className="font-medium">{tx.description}</TableCell>
                                     <TableCell>
                                         <Badge variant={tx.type === 'Income' ? 'default' : tx.type === 'Expense' ? 'destructive' : 'secondary'}
-                                               className={tx.type === 'Income' ? 'bg-green-100 text-green-800' : tx.type === 'Expense' ? 'bg-red-100 text-red-800' : ''}>
+                                               className={tx.type === 'Income' ? 'bg-[hsl(var(--chart-2))]' : tx.type === 'Expense' ? '' : ''}>
                                             {tx.type}
                                         </Badge>
                                     </TableCell>
-                                    <TableCell>{tx.tax ? <Badge variant="outline">{tx.tax}</Badge> : '-'}</TableCell>
-                                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    <TableCell>{tx.tax ? <Badge variant="outline">{tx.tax}</Badge> : '—'}</TableCell>
+                                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
                                         ${Math.abs(tx.amount).toFixed(2)}
                                     </TableCell>
                                     <TableCell>{tx.date}</TableCell>

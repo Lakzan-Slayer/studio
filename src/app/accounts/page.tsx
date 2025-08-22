@@ -26,15 +26,15 @@ export default function AccountsPage() {
                 <CardContent>
                     <div className="space-y-4">
                         {linkedAccounts.map(account => (
-                            <div key={account.id} className="flex items-center justify-between p-4 border rounded-lg">
+                            <div key={account.id} className="flex items-center justify-between p-4 border rounded-lg bg-secondary/30">
                                 <div className="flex items-center gap-4">
-                                    <Image src={account.logoUrl} alt={account.bankName} width={40} height={40} data-ai-hint={account.aiHint} />
+                                    <Image src={account.logoUrl} alt={account.bankName} width={40} height={40} data-ai-hint={account.aiHint} className="rounded-full" />
                                     <div>
                                         <p className="font-semibold">{account.bankName}</p>
                                         <p className="text-sm text-muted-foreground">{account.accountNumber}</p>
                                     </div>
                                 </div>
-                                <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-600">
+                                <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive/80">
                                     <Trash2 className="h-4 w-4" />
                                 </Button>
                             </div>

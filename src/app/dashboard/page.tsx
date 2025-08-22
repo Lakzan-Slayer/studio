@@ -17,10 +17,10 @@ export default function DashboardPage() {
   return (
     <AppLayout pageTitle="Dashboard">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} color="text-green-600" />
-        <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} color="text-red-600" />
-        <MetricCard title="Tax Payable" value="$250" icon={FileDigit} color="text-red-600" />
-        <MetricCard title="Total Savings" value="$4,200" icon={PiggyBank} color="text-green-600" />
+        <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} color="text-[hsl(var(--chart-2))]" />
+        <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} color="text-[hsl(var(--chart-5))]" />
+        <MetricCard title="Tax Payable" value="$250" icon={FileDigit} color="text-destructive" />
+        <MetricCard title="Total Savings" value="$4,200" icon={PiggyBank} color="text-[hsl(var(--chart-1))]" />
       </div>
 
       <div className="mt-6">
@@ -50,7 +50,7 @@ export default function DashboardPage() {
                   <TableRow key={tx.id}>
                     <TableCell className="font-medium">{tx.description}</TableCell>
                     <TableCell>{tx.type}</TableCell>
-                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
                       ${Math.abs(tx.amount).toFixed(2)}
                     </TableCell>
                     <TableCell>{tx.date}</TableCell>
