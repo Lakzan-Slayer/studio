@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, ArrowRightLeft, FileText, Newspaper, Calculator, Sparkles } from "lucide-react";
+import { LayoutDashboard, ArrowRightLeft, FileText, Newspaper, Calculator, Sparkles, User } from "lucide-react";
 
 type NavItem = {
   label: string;
@@ -17,6 +17,11 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Transactions",
     href: "/transactions",
     icon: ArrowRightLeft,
+  },
+    {
+    label: "Personal Details",
+    href: "/personal-details",
+    icon: User,
   },
   {
     label: "Reports",
