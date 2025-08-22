@@ -49,7 +49,7 @@ export default function Home() {
                 height="400"
                 alt="FinTrackr Dashboard"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
-                data-ai-hint="finance dashboard"
+                data-ai-hint="financial chart"
               />
             </div>
           </div>
