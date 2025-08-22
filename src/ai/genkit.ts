@@ -29,7 +29,7 @@ export const ai = genkit({
 
     // The Google Cloud plugin is used to store traces in Google
     // Cloud Logging.
-    googleCloud(),
+    googleCloud,
   ],
 
   // Where to store traces.
