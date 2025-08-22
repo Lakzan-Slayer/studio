@@ -13,7 +13,7 @@ export default function SignupPage() {
           alt="Image"
           width="1200"
           height="900"
-          data-ai-hint="finance abstract"
+          data-ai-hint="finance infographic"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
