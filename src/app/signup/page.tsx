@@ -9,7 +9,7 @@ export default function SignupPage() {
     <div className="w-full lg:grid lg:min-h-dvh lg:grid-cols-2 xl:min-h-dvh">
       <div className="hidden bg-muted lg:block">
         <Image
-          src="https://placehold.co/1200x900.png"
+          src="https://i.ibb.co/qj5bVvL/Screenshot-2024-07-29-at-12-28-29-PM.png"
           alt="Image"
           width="1200"
           height="900"
