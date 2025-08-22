@@ -3,7 +3,9 @@ import { MetricCard } from "@/components/dashboard/metric-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TrendingUp, TrendingDown, FileDigit, PiggyBank, PlusCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, FileDigit, PiggyBank, Plus, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export default function DashboardPage() {
   const recentTransactions = [
@@ -11,28 +13,29 @@ export default function DashboardPage() {
     { id: 2, description: "Groceries", amount: -150, type: "Expense", date: "2024-07-14" },
     { id: 3, description: "Freelance Project", amount: 800, type: "Income", date: "2024-07-12" },
     { id: 4, description: "Rent", amount: -1200, type: "Expense", date: "2024-07-10" },
-    { id: 5, description: "TDS Deduction", amount: -250, type: "Tax", date: "2024-07-15" },
   ];
   
   return (
     <AppLayout pageTitle="Dashboard">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} color="text-[hsl(var(--chart-2))]" />
-        <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} color="text-[hsl(var(--chart-5))]" />
-        <MetricCard title="Tax Payable" value="$250" icon={FileDigit} color="text-destructive" />
-        <MetricCard title="Total Savings" value="$4,200" icon={PiggyBank} color="text-[hsl(var(--chart-1))]" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} change="+20.1%" changeColor="text-green-500" />
+        <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} change="+5.2%" changeColor="text-red-500" />
+        <MetricCard title="Tax Payable" value="$250" icon={FileDigit} change="-2.1%" changeColor="text-green-500" />
+        <MetricCard title="Total Savings" value="$4,200" icon={PiggyBank} change="+15.8%" changeColor="text-green-500" />
       </div>
 
-      <div className="mt-6">
-        <Card>
+      <div className="mt-6 relative">
+         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle>Recent Transactions</CardTitle>
-              <CardDescription>Here's a list of your recent financial activities.</CardDescription>
+              <CardDescription>Your latest financial activities.</CardDescription>
             </div>
-            <Button variant="outline" size="sm">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Quick Add
+            <Button variant="ghost" size="sm" asChild>
+                <Link href="/transactions">
+                    See All
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
             </Button>
           </CardHeader>
           <CardContent>
@@ -40,20 +43,20 @@ export default function DashboardPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Description</TableHead>
-                  <TableHead>Type</TableHead>
+                  <TableHead className="hidden sm:table-cell">Type</TableHead>
                   <TableHead className="text-right">Amount</TableHead>
-                  <TableHead>Date</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {recentTransactions.map((tx) => (
                   <TableRow key={tx.id}>
                     <TableCell className="font-medium">{tx.description}</TableCell>
-                    <TableCell>{tx.type}</TableCell>
-                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
-                      ${Math.abs(tx.amount).toFixed(2)}
+                    <TableCell className="hidden sm:table-cell">
+                       <Badge variant={tx.type === 'Income' ? 'income' : 'destructive'}>{tx.type}</Badge>
                     </TableCell>
-                    <TableCell>{tx.date}</TableCell>
+                    <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                      {tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount).toFixed(2)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -61,6 +64,14 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Button asChild className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50">
+          <Link href="/transactions">
+            <Plus className="h-6 w-6" />
+            <span className="sr-only">Add Transaction</span>
+          </Link>
+      </Button>
+
     </AppLayout>
   );
 }

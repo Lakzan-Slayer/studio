@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MountainIcon, BotIcon, TrendingUpIcon, FileTextIcon, NewspaperIcon } from 'lucide-react';
+import { MountainIcon, TrendingUpIcon, FileTextIcon, NewspaperIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-16 flex items-center bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+    <div className="flex flex-col min-h-screen bg-neutral-50">
+      <header className="px-4 lg:px-6 h-16 flex items-center bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b">
         <Link href="#" className="flex items-center justify-center" prefetch={false}>
           <MountainIcon className="h-6 w-6 text-primary" />
           <span className="sr-only">FinTrackr</span>
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-card">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -66,26 +66,26 @@ export default function Home() {
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:max-w-none mt-12">
-              <div className="grid gap-1 text-center">
+              <Card className="grid gap-1 text-center p-6 shadow-sm hover:shadow-md transition-shadow">
                 <TrendingUpIcon className="h-10 w-10 mx-auto text-primary" />
                 <h3 className="text-lg font-bold">Metrics Dashboard</h3>
                 <p className="text-sm text-muted-foreground">Visualize your income, expenses, and savings with our intuitive dashboard.</p>
-              </div>
-              <div className="grid gap-1 text-center">
+              </Card>
+              <Card className="grid gap-1 text-center p-6 shadow-sm hover:shadow-md transition-shadow">
                 <FileTextIcon className="h-10 w-10 mx-auto text-primary" />
                 <h3 className="text-lg font-bold">Easy Reporting</h3>
                 <p className="text-sm text-muted-foreground">Generate reports for tax filing and financial planning with a single click.</p>
-              </div>
-              <div className="grid gap-1 text-center">
+              </Card>
+              <Card className="grid gap-1 text-center p-6 shadow-sm hover:shadow-md transition-shadow">
                 <NewspaperIcon className="h-10 w-10 mx-auto text-primary" />
                 <h3 className="text-lg font-bold">Financial News</h3>
                 <p className="text-sm text-muted-foreground">Stay updated with the latest financial news and changes in tax regulations.</p>
-              </div>
+              </Card>
             </div>
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
         <p className="text-xs text-muted-foreground">&copy; 2024 FinTrackr. All rights reserved.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
