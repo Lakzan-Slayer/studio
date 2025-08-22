@@ -119,7 +119,7 @@ export default function TransactionsPage() {
                                         </TableCell>
                                         <TableCell>{tx.tax ? <Badge variant="outline">{tx.tax}</Badge> : '—'}</TableCell>
                                         <TableCell className={`text-right font-semibold whitespace-nowrap ${tx.amount > 0 ? 'text-[hsl(var(--chart-2))]' : 'text-destructive'}`}>
-                                            ${Math.abs(tx.amount).toFixed(2)}
+                                            ₹{Math.abs(tx.amount).toFixed(2)}
                                         </TableCell>
                                         <TableCell className="whitespace-nowrap">{tx.date}</TableCell>
                                     </TableRow>

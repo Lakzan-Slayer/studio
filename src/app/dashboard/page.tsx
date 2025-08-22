@@ -18,10 +18,10 @@ export default function DashboardPage() {
   return (
     <AppLayout pageTitle="Dashboard">
       <div className="grid gap-4 md:grid-cols-2">
-        <MetricCard title="Total Income" value="$5,800" icon={TrendingUp} change="+20.1%" changeColor="text-green-500" />
-        <MetricCard title="Total Expenses" value="$1,350" icon={TrendingDown} change="+5.2%" changeColor="text-red-500" />
-        <MetricCard title="Tax Payable" value="$250" icon={FileDigit} change="-2.1%" changeColor="text-green-500" />
-        <MetricCard title="Total Savings" value="$4,200" icon={PiggyBank} change="+15.8%" changeColor="text-green-500" />
+        <MetricCard title="Total Income" value="₹5,800" icon={TrendingUp} change="+20.1%" changeColor="text-green-500" />
+        <MetricCard title="Total Expenses" value="₹1,350" icon={TrendingDown} change="+5.2%" changeColor="text-red-500" />
+        <MetricCard title="Tax Payable" value="₹250" icon={FileDigit} change="-2.1%" changeColor="text-green-500" />
+        <MetricCard title="Total Savings" value="₹4,200" icon={PiggyBank} change="+15.8%" changeColor="text-green-500" />
       </div>
 
       <div className="mt-6 relative">
@@ -56,7 +56,7 @@ export default function DashboardPage() {
                         <Badge variant={tx.type === 'Income' ? 'income' : 'destructive'}>{tx.type}</Badge>
                         </TableCell>
                         <TableCell className={`text-right font-semibold ${tx.amount > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount).toFixed(2)}
+                        {tx.amount > 0 ? '+' : '-'}₹{Math.abs(tx.amount).toFixed(2)}
                         </TableCell>
                     </TableRow>
                     ))}
