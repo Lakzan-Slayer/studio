@@ -31,7 +31,7 @@ export default function Home() {
                     Intelligent Finance Tracking for Modern Times
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    FinTrackr helps you manage your finances with ease, from transaction logging to AI-powered tax-saving insights.
+                    FinTrackr helps you manage your finances with ease, from transaction logging to tax-saving insights.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -66,11 +66,6 @@ export default function Home() {
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:max-w-none mt-12">
-              <div className="grid gap-1 text-center">
-                <BotIcon className="h-10 w-10 mx-auto text-primary" />
-                <h3 className="text-lg font-bold">AI Tax Insights</h3>
-                <p className="text-sm text-muted-foreground">Get personalized tax-saving suggestions and find opportunities you might have missed.</p>
-              </div>
               <div className="grid gap-1 text-center">
                 <TrendingUpIcon className="h-10 w-10 mx-auto text-primary" />
                 <h3 className="text-lg font-bold">Metrics Dashboard</h3>

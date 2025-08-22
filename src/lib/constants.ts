@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, ArrowRightLeft, FileText, Sparkles, Newspaper, Landmark } from "lucide-react";
+import { LayoutDashboard, ArrowRightLeft, FileText, Newspaper, Landmark } from "lucide-react";
 
 type NavItem = {
   label: string;
@@ -17,11 +17,6 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Transactions",
     href: "/transactions",
     icon: ArrowRightLeft,
-  },
-  {
-    label: "AI Insights",
-    href: "/insights",
-    icon: Sparkles,
   },
   {
     label: "Reports",
